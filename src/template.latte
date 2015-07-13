@@ -1,0 +1,10 @@
+{* Latte template *}
+
+{block content}
+
+<form n:name="uploadForm" class="dropzone alert alert-info">
+	<div class="fallback">
+		<input n:name="file" multiple />
+	</div>
+	<div class="fileUpload-settings" data-fileUpload-settings="{$uploadSettings}"></div>
+</form>

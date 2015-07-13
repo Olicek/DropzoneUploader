@@ -1,0 +1,19 @@
+{
+	"name": "olicek/dropzone-uploader",
+	"description": "Uploader for Nette framework",
+	"homepage": "https://github.com/Olicek/DropzoneUploader",
+	"license": "GPL-3.0",
+	"authors": [
+		{
+			"name": "Petr Olišar",
+			"homepage": "http://olisar.eu"
+		}
+	],
+	"require": {
+		"php": ">= 5.4.0",
+		"nette/nette": ">2.1.0"
+	},
+	"autoload": {
+		"classmap": ["src/"]
+	}
+}
