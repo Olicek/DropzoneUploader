@@ -168,7 +168,7 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 			$this->moveUploadedFile($file, $targetPath, $name);
 		}
 
-		$this->onSuccess($this, $targetPath, $name);
+		$this->onSuccess($this, $this->path, $name);
 	}
 	
 	
