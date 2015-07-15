@@ -23,6 +23,8 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 
 	private $settings;
 	
+	private $photo;
+	
 	private $isImage = TRUE;
 	
 	private $allowType = NULL;
@@ -36,6 +38,12 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 	{
 		$this->path = $path;
 		return $this;
+	}
+
+	
+	public function setPhoto($photo)
+	{
+		$this->photo = $photo;
 	}
 	
 	
@@ -151,17 +159,17 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 		{
 			$image = $file->toImage();
 			
-			$width = $this->settings['photo']['width'];
-			$height = $this->settings['photo']['height'];
-			$flags = $this->settings['photo']['width'];
-			
+			$width = $this->photo['width'];
+			$height = $this->photo['height'];
+			$flags = $this->photo['width'];
+
 			if(!is_null($width) || !is_null($height))
 			{
 				$image->resize($width, $height, $flags);
 			}
-				
+
 			$image->save($targetPath . DIRECTORY_SEPARATOR .
-				$name, $this->settings['photo']['quality'], $this->settings['photo']['type']);
+				$name, $this->photo['quality'], $this->photo['type']);
 			
 		} else
 		{

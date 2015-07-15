@@ -23,13 +23,13 @@ class DropzoneUploaderExtension extends \Nette\DI\CompilerExtension
 		'settings' => [
 			'maxFilesize' => 5,
 			'fileSizeLimit' => 100,
-			'photo' => [
-				'width' => NULL,
-				'height' => NULL,
-				'flags' => \Nette\Utils\Image::FIT,
-				'quality' => NULL,
-				'type' => NULL
-			],
+		],
+		'photo' => [
+			'width' => NULL,
+			'height' => NULL,
+			'flags' => \Nette\Utils\Image::FIT,
+			'quality' => NULL,
+			'type' => NULL
 		],
 		'isImage' => TRUE,
 		'allowType' => NULL,
@@ -49,6 +49,7 @@ class DropzoneUploaderExtension extends \Nette\DI\CompilerExtension
 			->addSetup('setWwwDir', [$config['wwwDir']])
 			->addSetup('setPath', [$config['path']])
 			->addSetup('setSettings', [$config['settings']])
+			->addSetup('setPhoto', [$config['photo']])
 			->addSetup('isImage', [$config['isImage']])
 			->addSetup('setAllowType', [$config['allowType']])
 			->addSetup('setRewriteExistingFiles', [$config['rewriteExistingFiles']]);
