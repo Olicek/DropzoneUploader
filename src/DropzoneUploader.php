@@ -40,6 +40,12 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 		return $this;
 	}
 
+
+	public function getPath()
+	{
+		return $this->path;
+	}
+
 	
 	public function setPhoto($photo)
 	{
@@ -176,7 +182,7 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 			$this->moveUploadedFile($file, $targetPath, $name);
 		}
 
-		$this->onSuccess($this, $this->path, $name);
+		$this->onSuccess($this, $this->path, implode('.', $SplitedName) . $counter, $suffix);
 	}
 	
 	
