@@ -9,7 +9,7 @@ Registrovat v extensions
 
 ```
 extensions:
-    map: Oli\GoogleAPI\MapApiExtension
+    map: Oli\Form\DropzoneUploaderExtension 
 ```
     	
 A nakonec nalinkovat `client-site/dropzoneUploader.js` do stránky.
