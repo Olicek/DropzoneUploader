@@ -3,7 +3,7 @@
 Instalace
 ============
 
-	composer require olicek/google-map-api:dev-master
+	composer require olicek/dropzone-uploader:dev-master
 
 Registrovat v extensions
 
