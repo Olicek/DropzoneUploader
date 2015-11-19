@@ -35,7 +35,13 @@ class DropzoneUploaderExtension extends \Nette\DI\CompilerExtension
 		'allowType' => NULL,
 		'rewriteExistingFiles' => FALSE
 	];
-	
+
+
+	public function getDefaults()
+	{
+		return $this->getConfig($this->defaults);
+	}
+
 	
 	public function loadConfiguration()
 	{
