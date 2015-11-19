@@ -20,6 +20,7 @@ Použití je potom poměrně triviální
 public function createComponentUploader($name, DropzoneUploaderFactory $factory)
 	{
 		$dropzone = $factory->create();
+		$dropzone->setGenerateRandomFileName(TRUE); //for random file name
 		$path = $dropzone->getPath();
 		$dropzone->onSuccess[] = function (DropzoneUploader $dropzoneUploader, $targetPath, $name, $suffix) {
 			$photo = new Photo;
