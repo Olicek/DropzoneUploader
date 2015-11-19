@@ -17,7 +17,7 @@ namespace Oli\Form;
 class DropzoneUploaderExtension extends \Nette\DI\CompilerExtension
 {
 	
-public $defaults = [
+	public $defaults = [
 		'wwwDir' => '%wwwDir%',
 		'path' => 'gallery/original',
 		'settings' => [],
@@ -33,7 +33,13 @@ public $defaults = [
 		'rewriteExistingFiles' => FALSE,
         	'generateRandomFileName' => FALSE
 
-    ];
+    	];
+    
+    
+    	public function getDefaults()
+	{
+		return $this->getConfig($this->defaults);
+	}
 	
 	
 	public function loadConfiguration()
