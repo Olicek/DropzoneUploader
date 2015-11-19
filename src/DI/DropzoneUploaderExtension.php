@@ -19,8 +19,11 @@ class DropzoneUploaderExtension extends \Nette\DI\CompilerExtension
 	
 	public $defaults = [
 		'wwwDir' => '%wwwDir%',
-		'path' => 'gallery/original',
-		'settings' => [],
+		'path' => 'gallery',
+		'settings' => [
+			'maxFilesize' => 5,
+			'fileSizeLimit' => 100,
+		],
 		'photo' => [
 			'width' => NULL,
 			'height' => NULL,
