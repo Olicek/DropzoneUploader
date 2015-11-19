@@ -31,6 +31,8 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 	
 	private $rewriteExistingFiles = FALSE;
 	
+	private $generateRandomFileName = FALSE;
+	
 	public $onSuccess = [];
 	
 	
@@ -86,6 +88,12 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 		$this->rewriteExistingFiles = $rewriteExistingFiles;
 		return $this;
 	}
+	
+	    public function setGenerateRandomFileName($generateRandomFileName)
+	{
+		$this->generateRandomFileName = $generateRandomFileName;
+		return $this;
+	}
 
 	
 	public function createComponentUploadForm()
@@ -116,50 +124,67 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 	
 	public function process(\Nette\Application\UI\Form $form, $values)
 	{
+
 		$file = $values->file;
 		if(!$file instanceof \Nette\Http\FileUpload)
 		{
 			throw new \Nette\FileNotFoundException('Nahraný soubor není typu Nette\Http\FileUpload. Pravděpodobně se nenahrál v pořádku.');
 		}
-		
+
 		if(!$file->isOk())
 		{
 			throw new \Nette\FileNotFoundException('Soubor byl poškozen:' . $file->error);
 		}
-		
+
 		if($this->isImage && $file->isImage() !== $this->isImage)
 		{
 			throw new \Nette\InvalidArgumentException('Soubor musí být obrázek');
 		}
-		
+
 		if(is_array($this->allowType) && in_array($file->getContentType(), $this->allowType, TRUE))
 		{
 			throw new \Nette\InvalidArgumentException('Soubor není povoleného typu');
 		}
-		
+
 		$this->handleCheckDirectory();
-		
+
 		$targetPath = $this->wwwDir . DIRECTORY_SEPARATOR . $this->path;
-		
-		if($this->rewriteExistingFiles)
-		{
-			$name = $file->getSanitizedName();
-			
-		} else
-		{
+
+
+	        if($this->generateRandomFileName)
+	        {
 			$SplitedName = \Nette\Utils\Strings::split($file->getSanitizedName(), '~\.\s*~');
 			$suffix = array_pop($SplitedName);
-			$counter = NULL;
-			
+		
+			$random = new \Nette\Utils\Random;
+			$randomName = $random->generate(48, '0-9a-zA-Z');
+		
 			while(is_file($targetPath . DIRECTORY_SEPARATOR .
-				implode('.', $SplitedName) . $counter . '.' . $suffix))
+			$randomName . '.' . $suffix))
 			{
-				$counter++;
+				$randomName = $random->generate(48, '0-9a-zA-Z');
 			}
-			
-			$name = implode('.', $SplitedName) . $counter . '.' . $suffix;
-			
-		}
+		
+			$name = $randomName. '.' . $suffix;
+	
+	        } else if($this->rewriteExistingFiles)
+	        {
+	            $name = $file->getSanitizedName();
+	
+	        } else
+	        {
+	            $SplitedName = \Nette\Utils\Strings::split($file->getSanitizedName(), '~\.\s*~');
+	            $suffix = array_pop($SplitedName);
+	            $counter = NULL;
+	
+	            while(is_file($targetPath . DIRECTORY_SEPARATOR .
+	                implode('.', $SplitedName) . $counter . '.' . $suffix))
+	            {
+	                $counter++;
+	            }
+	
+	            $name = implode('.', $SplitedName) . $counter . '.' . $suffix;
+	        }
 		
 		if($file->isImage())
 		{
@@ -182,8 +207,16 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 			$this->moveUploadedFile($file, $targetPath, $name);
 		}
 
-		$this->onSuccess($this, $this->path, implode('.', $SplitedName) . $counter, $suffix);
-	}
+	        if(!$this->generateRandomFileName)
+	        {
+	            $fileName = implode('.', $SplitedName) . $counter;
+	        } else
+	        {
+	            $fileName = $randomName;
+	        }
+	
+	        $this->onSuccess($this, $this->path, $fileName, $suffix);
+        }
 	
 	
 	private function moveUploadedFile($file, $targetPath, $name)
