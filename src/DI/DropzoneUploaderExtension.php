@@ -35,7 +35,6 @@ class DropzoneUploaderExtension extends \Nette\DI\CompilerExtension
 		'allowType' => NULL,
 		'rewriteExistingFiles' => FALSE,
         	'generateRandomFileName' => FALSE
-
     	];
     
     
@@ -62,7 +61,6 @@ class DropzoneUploaderExtension extends \Nette\DI\CompilerExtension
 			->addSetup('setAllowType', [$config['allowType']])
 			->addSetup('setRewriteExistingFiles', [$config['rewriteExistingFiles']])
             		->addSetup('setGenerateRandomFileName', [$config['generateRandomFileName']]);
-		
 	}
 	
 }
