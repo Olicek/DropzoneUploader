@@ -167,7 +167,7 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 			
 			$width = $this->photo['width'];
 			$height = $this->photo['height'];
-			$flags = $this->photo['width'];
+			$flags = $this->photo['flags'];
 
 			if(!is_null($width) || !is_null($height))
 			{
