@@ -14,7 +14,7 @@ extensions:
     	
 A nakonec nalinkovat `client-site/dropzoneUploader.js` do stránky.
 
-Použití je potom poměrně triviální
+## Použití
 
 ```
 public function createComponentUploader($name, DropzoneUploaderFactory $factory)
@@ -39,3 +39,26 @@ V šabloně
 ```
 
 A v základu by to mělo být vše. Ten soubor `client-site/dropzoneUploader.js` jsem se snažil udělat co nejobecnější aby bylo možné s ním pracovat pokudmožno bez zásahu do něj. Nemusí se použít vubec, jediné na čem záleží je třída `.dropzone`, která se teda taky ale může změnit :-)
+
+## Po nahrání
+
+Po úspěšném nahrání je nastaveno aby se přesměrovalo na předpřipravený signál `handleRefresh`.
+Je možné v sekci `settings` zvolit jestli se má použít **ajax** a kam se má přesměrovat.
+Zatím je možné zvolit pouze signál nebo `this`, když to bude potřeba tak dodělám přesměrování na nějaký presenter.
+
+### Example
+
+```
+dropzone:
+	path: 'gallery/photos'
+	settings:
+	    ajax: on
+```
+
+
+```
+dropzone:
+	path: 'gallery/photos'
+	settings:
+	    onSuccess: 'this'
+```

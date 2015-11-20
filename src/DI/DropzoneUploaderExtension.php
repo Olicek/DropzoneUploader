@@ -21,8 +21,10 @@ class DropzoneUploaderExtension extends \Nette\DI\CompilerExtension
 		'wwwDir' => '%wwwDir%',
 		'path' => 'gallery',
 		'settings' => [
-			'maxFilesize' => 5,
+			'maxFiles' => 5,
 			'fileSizeLimit' => 100,
+			'ajax' => FALSE,
+			'onSuccess' => 'refresh!'
 		],
 		'photo' => [
 			'width' => NULL,

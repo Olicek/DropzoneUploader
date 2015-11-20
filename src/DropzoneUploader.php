@@ -106,7 +106,7 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 	public function render()
 	{
 		$settings = $this->settings;
-		$settings['onSuccess'] = $this->link('this');
+		$settings['onSuccess'] = $this->link($settings['onSuccess']);
 		$settings['onUploadStart'] = $this->link('checkDirectory!');
 		$this->template->uploadSettings = \Nette\Utils\Json::encode($settings);
 		$this->template->setFile(__DIR__ . '/template.latte');
@@ -202,6 +202,11 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 		}
 		
 		umask($oldmask);
+	}
+
+
+	public function handleRefresh(){
+		$this->redrawControl('photos');
 	}
 	
 }
