@@ -34,7 +34,7 @@ class DropzoneUploaderExtension extends \Nette\DI\CompilerExtension
 		'isImage' => TRUE,
 		'allowType' => NULL,
 		'rewriteExistingFiles' => FALSE,
-        	'generateRandomFileName' => FALSE
+        	'randomFileName' => FALSE
     	];
     
     
@@ -60,7 +60,7 @@ class DropzoneUploaderExtension extends \Nette\DI\CompilerExtension
 			->addSetup('isImage', [$config['isImage']])
 			->addSetup('setAllowType', [$config['allowType']])
 			->addSetup('setRewriteExistingFiles', [$config['rewriteExistingFiles']])
-            		->addSetup('setGenerateRandomFileName', [$config['generateRandomFileName']]);
+            		->addSetup('setRandomFileName', [$config['randomFileName']]);
 	}
 	
 }
