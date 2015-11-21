@@ -170,21 +170,21 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 	
 	        } else if($this->rewriteExistingFiles)
 	        {
-	            $name = $file->getSanitizedName();
+			$name = $file->getSanitizedName();
 	
 	        } else
 	        {
-	            $SplitedName = \Nette\Utils\Strings::split($file->getSanitizedName(), '~\.\s*~');
-	            $suffix = array_pop($SplitedName);
-	            $counter = NULL;
-	
-	            while(is_file($targetPath . DIRECTORY_SEPARATOR .
-	                implode('.', $SplitedName) . $counter . '.' . $suffix))
-	            {
-	                $counter++;
-	            }
-	
-	            $name = implode('.', $SplitedName) . $counter . '.' . $suffix;
+			$SplitedName = \Nette\Utils\Strings::split($file->getSanitizedName(), '~\.\s*~');
+			$suffix = array_pop($SplitedName);
+			$counter = NULL;
+			
+			while(is_file($targetPath . DIRECTORY_SEPARATOR .
+			implode('.', $SplitedName) . $counter . '.' . $suffix))
+			{
+			$counter++;
+			}
+			
+			$name = implode('.', $SplitedName) . $counter . '.' . $suffix;
 	        }
 		
 		if($file->isImage())
@@ -210,10 +210,10 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 
 	        if(!$this->randomFileName)
 	        {
-	            $fileName = implode('.', $SplitedName) . $counter;
+			$fileName = implode('.', $SplitedName) . $counter;
 	        } else
 	        {
-	            $fileName = $randomName;
+			$fileName = $randomName;
 	        }
 	
 	        $this->onSuccess($this, $this->path, $fileName, $suffix);
