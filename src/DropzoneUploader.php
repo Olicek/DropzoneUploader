@@ -31,7 +31,7 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 	
 	private $rewriteExistingFiles = FALSE;
 	
-	private $generateRandomFileName = FALSE;
+	private $randomFileName = FALSE;
 	
 	public $onSuccess = [];
 	
@@ -89,9 +89,10 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 		return $this;
 	}
 	
-	    public function setGenerateRandomFileName($generateRandomFileName)
+	
+	public function setRandomFileName($randomFileName)
 	{
-		$this->generateRandomFileName = $generateRandomFileName;
+		$this->randomFileName = $randomFileName;
 		return $this;
 	}
 
@@ -151,7 +152,7 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 		$targetPath = $this->wwwDir . DIRECTORY_SEPARATOR . $this->path;
 
 
-	        if($this->generateRandomFileName)
+	        if($this->randomFileName)
 	        {
 			$SplitedName = \Nette\Utils\Strings::split($file->getSanitizedName(), '~\.\s*~');
 			$suffix = array_pop($SplitedName);
@@ -207,7 +208,7 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 			$this->moveUploadedFile($file, $targetPath, $name);
 		}
 
-	        if(!$this->generateRandomFileName)
+	        if(!$this->randomFileName)
 	        {
 	            $fileName = implode('.', $SplitedName) . $counter;
 	        } else
