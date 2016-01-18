@@ -9,7 +9,7 @@ Registrovat v extensions
 
 ```
 extensions:
-    map: Oli\Form\DropzoneUploaderExtension 
+    dropzone: Oli\Form\DropzoneUploaderExtension 
 ```
     	
 A nakonec nalinkovat `client-site/dropzoneUploader.js` do stránky.
