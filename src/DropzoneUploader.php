@@ -97,7 +97,7 @@ class DropzoneUploader extends \Nette\Application\UI\Control
 		$form->addUpload("file", NULL)
 			->setHtmlId("fileUpload");
 		
-		$form->onSuccess[] = $this->process;
+		$form->onSuccess[] = [$this, 'process'];
 		
 		return $form;
 	}
