@@ -35,15 +35,16 @@ class DropzoneUploaderExtension extends \Nette\DI\CompilerExtension
 		],
 		'isImage' => TRUE,
 		'allowType' => NULL,
-		'rewriteExistingFiles' => FALSE
-	];
-
-
-	public function getDefaults()
+		'rewriteExistingFiles' => FALSE,
+        	'randomFileName' => FALSE
+    	];
+    
+    
+    	public function getDefaults()
 	{
 		return $this->getConfig($this->defaults);
 	}
-
+	
 	
 	public function loadConfiguration()
 	{
@@ -60,8 +61,8 @@ class DropzoneUploaderExtension extends \Nette\DI\CompilerExtension
 			->addSetup('setPhoto', [$config['photo']])
 			->addSetup('isImage', [$config['isImage']])
 			->addSetup('setAllowType', [$config['allowType']])
-			->addSetup('setRewriteExistingFiles', [$config['rewriteExistingFiles']]);
-		
+			->addSetup('setRewriteExistingFiles', [$config['rewriteExistingFiles']])
+            		->addSetup('setRandomFileName', [$config['randomFileName']]);
 	}
 	
 }

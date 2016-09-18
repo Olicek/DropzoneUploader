@@ -20,6 +20,7 @@ A nakonec nalinkovat `client-site/dropzoneUploader.js` do stránky.
 public function createComponentUploader($name, DropzoneUploaderFactory $factory)
 	{
 		$dropzone = $factory->create();
+		$dropzone->setGenerateRandomFileName(TRUE); //for random file name
 		$path = $dropzone->getPath();
 		$dropzone->onSuccess[] = function (DropzoneUploader $dropzoneUploader, $targetPath, $name, $suffix) {
 			$photo = new Photo;
